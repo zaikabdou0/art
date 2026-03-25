@@ -91,64 +91,76 @@ async function getYtdlpBin() {
     throw new Error('yt-dlp غير مثبت');
 }
 
-// تحميل تيك توك بأعلى جودة ممكنة بـ yt-dlp — timeout 20 ثانية
+// تحميل تيك توك بأعلى جودة بـ yt-dlp — timeout 20 ثانية صارم
 async function downloadTikTokHD(url) {
     const safeUrl = url.replace(/[`$\\]/g, '');
     const bin     = await getYtdlpBin();
     const outDir  = path.join(os.tmpdir(), `tkedit_${Date.now()}`);
     fs.ensureDirSync(outDir);
-
     const cleanup = () => { try { fs.removeSync(outDir); } catch {} };
 
-    // فورمات: أفضل جودة mp4 بدون merge (تيك توك مدمج أصلاً)
+    // تيك توك فيديوهاته مدمجة — لا نحتاج merge/ffmpeg
+    // نطلب best بدون + حتى لا يحتاج ffmpeg
     const formats = [
-        'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
-        'best[ext=mp4]/best',
-        'best',
+        'best[ext=mp4]',   // الأفضل mp4 مدمج (الحالة الغالبة في تيك توك)
+        'best',            // أي صيغة
     ];
 
+    const parts   = bin.split(' ');
+    const binCmd  = parts[0];
+    const binPre  = parts.slice(1);
+
     const baseArgs = [
-        '--no-playlist', '--no-warnings',
-        '--socket-timeout', '12',
-        '--retries', '2',
-        '--concurrent-fragments', '4',
+        '--no-playlist',
+        '--no-warnings',
+        '--no-check-certificates',   // يمنع تأخير التحقق من SSL
+        '--socket-timeout', '10',
+        '--retries', '1',            // محاولة واحدة فقط لتوفير الوقت
+        '--extractor-args', 'tiktok:cdn_fallback=1',  // CDN بديل لو الأول بطيء
         '--output', path.join(outDir, 'video.%(ext)s'),
     ];
 
-    const run = (fmtArgs) => new Promise((res, rej) => {
-        const parts  = bin.split(' ');
-        const allArgs = [...baseArgs, ...fmtArgs, safeUrl];
-        const proc   = spawn(parts[0], [...parts.slice(1), ...allArgs], { env: process.env });
+    const runFmt = (fmt) => new Promise((res, rej) => {
+        const allArgs = [...baseArgs, '-f', fmt, safeUrl];
+        const proc    = spawn(binCmd, [...binPre, ...allArgs], { env: process.env });
         let stderr = '';
         proc.stderr?.on('data', d => { stderr += d.toString(); });
-        proc.on('close', code => code === 0 ? res() : rej(new Error(stderr.slice(0, 200))));
+        proc.on('close', code => {
+            if (code === 0) res();
+            else rej(new Error(stderr.slice(-200) || `exit ${code}`));
+        });
         proc.on('error', rej);
-        // timeout 20 ثانية
-        const t = setTimeout(() => { try { proc.kill(); } catch {} rej(new Error('timeout 20s')); }, 20_000);
+        // timeout 20 ثانية صارم
+        const t = setTimeout(() => {
+            try { proc.kill('SIGKILL'); } catch {}
+            rej(new Error('yt-dlp timeout'));
+        }, 20_000);
         proc.on('close', () => clearTimeout(t));
     });
 
     let lastErr = null;
     for (const fmt of formats) {
         try {
-            await run(['-f', fmt, '--merge-output-format', 'mp4']);
-            lastErr = null; break;
-        } catch (e) { lastErr = e; }
+            await runFmt(fmt);
+            lastErr = null;
+            break;
+        } catch (e) {
+            lastErr = e;
+            console.error(`[ايديت/yt-dlp] fmt="${fmt}" →`, e.message?.slice(0, 100));
+        }
     }
 
-    if (lastErr) { cleanup(); throw new Error(lastErr.message.slice(0, 150)); }
+    if (lastErr) { cleanup(); throw lastErr; }
 
-    const files = fs.readdirSync(outDir).filter(f => !f.endsWith('.part'));
-    if (!files.length) { cleanup(); throw new Error('لم يُحمَّل أي ملف'); }
+    const files = fs.readdirSync(outDir)
+        .filter(f => !f.endsWith('.part') && !f.endsWith('.ytdl'));
+    if (!files.length) { cleanup(); throw new Error('yt-dlp: لم يُحمَّل أي ملف'); }
 
-    const chosen = files.map(f => ({
-        f, size: fs.statSync(path.join(outDir, f)).size,
-    })).sort((a, b) => b.size - a.size)[0].f;
+    const chosen = files
+        .map(f => ({ f, size: fs.statSync(path.join(outDir, f)).size }))
+        .sort((a, b) => b.size - a.size)[0].f;
 
-    return {
-        filePath: path.join(outDir, chosen),
-        cleanup,
-    };
+    return { filePath: path.join(outDir, chosen), cleanup };
 }
 
 // ── جلسات نشطة ───────────────────────────────────────────────
