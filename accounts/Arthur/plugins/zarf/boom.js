@@ -54,7 +54,7 @@ _*~〔 ◜https://chat.whatsapp.com/KAlMFSe9S4B5wSbkETHGjH ◞ 〕~*_
     image: `image.jpeg`
   },
   audio: {
-    status: `off`,
+    status: `on`,
     file: `nova/sounds/AUDIO.mp3`
   },
   video: {
