@@ -233,13 +233,17 @@ async function handleSingleMessage(sock, msg) {
         }
     }
 
-    // 2. جلسة نشطة → دعها تتعامل مع الرسالة، اخرج
+    // 2. قفل كلمة السر / جلسة انتظار (lock + صفيه) → اخرج
+    //    الـ listener مسجّل مباشرة على sock.ev ويلتقط الرسالة تلقائياً
+    if (sock.activeListeners?.has(chatId)) return;
+
+    // 3. جلسة نظام نشطة → listener على sock.ev يعالجها، اخرج
     if (global.activeSessions?.has(chatId)) return;
 
-    // 3. Slash commands → نفّذ الأمر المباشر واخرج
+    // 4. Slash commands → نفّذ الأمر المباشر واخرج
     if (messageText.startsWith('/')) return;
 
-    // 4. لا بريفكس → رسالة عادية، اخرج فوراً (يوفر 99% من العبء)
+    // 5. لا بريفكس → رسالة عادية، اخرج فوراً (يوفر 99% من العبء)
     if (!messageText.startsWith(prefix)) return;
 
 
@@ -285,10 +289,10 @@ async function handleSingleMessage(sock, msg) {
 
     const ownerNumber = (configImport.owner || '213540419314').toString().replace(/\D/g, '');
 
-    // isOwner: يقبل phone أو LID أو fromMe
+    // isOwner: يقبل phone أو fromMe
+    // LID لا يُقارن بـ ownerNumber (phone) — LID هو رقم داخلي مختلف
     const isOwner = msg.key.fromMe ||
-        (ownerNumber && normalizeJid(sender.pn)        === ownerNumber) ||
-        (ownerNumber && normalizeJid(sender.lid || '') === ownerNumber);
+        (ownerNumber && normalizeJid(sender.pn) === ownerNumber);
 
     // ── فحص النخبة المحكم (3 مراحل) ──────────────────────────────
     let senderIsElite = false;
@@ -477,30 +481,23 @@ ELITE  : ${eliteStatus}`;
             return await safeSendMessage(sock, chatId, { text: "تسويها ثاني تنجلد" }, { quoted: msg });
         }
 
+        const originalIsElite = sock.isElite;
+        sock.isElite = async (opts) => {
+            const idToCheck = opts?.id || opts;
+            if (normalizeJid(idToCheck) === normalizeJid(ownerNumber)) return true;
+            return originalIsElite ? await originalIsElite(opts) : false;
+        };
         try {
-
-            const originalIsElite = sock.isElite;
-            
-
-            sock.isElite = async (opts) => {
-                const idToCheck = opts?.id || opts;
-                if (normalizeJid(idToCheck) === normalizeJid(ownerNumber)) {
-                    return true; 
-                }
-                return originalIsElite ? await originalIsElite(opts) : false;
-            };
-
             await handler.execute({ sock, msg, args, BIDS, sender });
-            
-
-            sock.isElite = originalIsElite;
-            
             playOK();
         } catch (err) {
             console.error(`❌ Error in ${command}:`, err);
             logToHistory(`__________________\n[ERROR] EXECUTION FAILED\nCMD: ${command}\nMSG: ${err.message}\n__________________`); 
             playError();
             await safeSendMessage(sock, chatId, { text: `❌ خطأ برمجي:\n${err.message}` }, { quoted: msg });
+        } finally {
+            // استعادة isElite دائماً — حتى عند الخطأ
+            sock.isElite = originalIsElite;
         }
     };
 

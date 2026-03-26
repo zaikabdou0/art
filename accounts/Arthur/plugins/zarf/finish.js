@@ -17,7 +17,7 @@ if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
 export let zarfConfig = {
   reaction: {
     status: `on`,
-    emoji: `🫦`
+    emoji: `🪶`
   },
   group: {
     status: `on`,
@@ -31,14 +31,24 @@ export let zarfConfig = {
   },
   finalMessage: {
     status: `on`,
-    text: `*┆⌁ 𝑨𝑹𝑻𝑯𝑼𝑹 𝑾𝑨𝑺 𝑯𝑬𝑹𝑬 🍁 ⌁┆*\n\n *𝑴𝒚 𝒔𝒕𝒆𝒑𝒔 𝒅𝒐 𝒏𝒐𝒕 𝒆𝒄𝒉𝒐—𝒕𝒉𝒆𝒚 𝒄𝒐𝒎𝒎𝒂𝒏𝒅. 𝑾𝒉𝒆𝒓𝒆 𝑰 𝒘𝒂𝒍𝒌, 𝒅𝒐𝒖𝒃𝒕 𝒅𝒊𝒆𝒔, 𝒂𝒏𝒅 𝒑𝒐𝒘𝒆𝒓 𝒓𝒊𝒔𝒆𝒔 𝒘𝒊𝒕𝒉 𝒆𝒗𝒆𝒓𝒚 𝒃𝒓𝒆𝒂𝒕𝒉 𝑰 𝒕𝒂𝒌𝒆.* \n\n> *_⟫ 𝑨𝒓𝒄𝒉𝒊𝒗𝒆 𝑺𝒉𝒆𝒆𝒕 ┆ 🍷𝑨𝑹𝑻𝑯𝑼𝑹お ⟪_*  \n*~〔 ◜ https://chat.whatsapp.com/FVN1S1V1KgC7C7SMvZ4zle ◞ 〕~*\n\n> *_⟫ 𝑺𝒊𝒍𝒆𝒏𝒕 𝑯𝒂𝒍𝒍 ┆ 🐉 𝑨𝑹𝑻𝑯𝑼𝑹お ⟪_*  \n*~〔 ◜https://chat.whatsapp.com/FVN1S1V1KgC7C7SMvZ4zle ◞ 〕~*\n\n *┊⟣⌁ 🩸 — 𝑨𝑹𝑻𝑯𝑼𝑹 ⌁⟢┊*`
+    text: `*☆┆⌁ مــــزروف ارثــ🪶ـــر  ㊛ ⌁┆*
+
+ *「 𝙼𝚢 𝚜𝚝𝚎𝚙𝚜 𝚍𝚘 𝚗𝚘𝚝 𝚎𝚌𝚑𝚘—𝚝𝚑𝚎𝚢 𝚌𝚘𝚖𝚖𝚊𝚗𝚍. 𝚆𝚑𝚎𝚛𝚎 𝙸 𝚠𝚊𝚕𝚔, 𝚍𝚘𝚞𝚋𝚝 𝚍𝚒𝚎𝚜, 𝚊𝚗𝚍 𝚙𝚘𝚠𝚎𝚛 𝚛𝚒𝚜𝚎𝚜 𝚠𝚒𝚝𝚑 𝚎𝚟𝚎𝚛𝚢 𝚋𝚛𝚎𝚊𝚝𝚑 𝙸 𝚝𝚊𝚔𝚎. 」* 
+
+> *_⟫ \`𝚃.𝚅   𝙰𝚁𝚅𝙰𝙽𝙸𝙰\`  ❀ ⟪_*  
+_*~〔 ◜ https://chat.whatsapp.com/FVN1S1V1KgC7C7SMvZ4zle ◞ 〕~*_
+
+> *_⟫ \`𝙴𝙳𝙸𝚃  𝙰𝚁𝚅𝙰𝙽𝙸𝙰\`┆ ❀ ⟪_*  
+_*~〔 ◜https://chat.whatsapp.com/KAlMFSe9S4B5wSbkETHGjH ◞ 〕~*_
+
+ *┊⌁ 🪶 — 𝙰𝚛𝚝𝚑𝚞𝚛 ㊚ ⌁┊*`
   },
   media: {
     status: `on`,
     image: `image.jpeg`
   },
   audio: {
-    status: `on`,
+    status: `off`,
     file: `nova/sounds/AUDIO.mp3`
   },
   video: {

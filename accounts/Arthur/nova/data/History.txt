@@ -784,3 +784,342 @@ __________________
 UNKNOWN: ..
 SENDER: 213541231299@s.whatsapp.net
 __________________
+
+[3/26/2026, 15:20:55]
+__________________
+SENDER : OWNER
+CMD    : اعدادات
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : PRIVATE
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:20:57]
+__________________
+SENDER : OWNER
+CMD    : اعدادات
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:20:59]
+__________________
+SENDER : OWNER
+CMD    : اعداداع
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:20:59]
+__________________
+UNKNOWN: اعداداع
+SENDER: 213540419314@s.whatsapp.net
+__________________
+
+[3/26/2026, 15:21:00]
+__________________
+SENDER : OWNER
+CMD    : اعدادات
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:30:04]
+__________________
+ℹ [SYSTEM]: Connection Closed (428).
+__________________
+
+[3/26/2026, 15:32:20]
+__________________
+SENDER : OWNER
+CMD    : اعدادات
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:36:23]
+__________________
+SENDER : OWNER
+CMD    : اعدادات
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:37:23]
+__________________
+SENDER : OWNER
+CMD    : زرف
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:37:39]
+__________________
+SENDER : OWNER
+CMD    : فنش
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:37:52]
+__________________
+SENDER : OWNER
+CMD    : فنش
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 15:58:05]
+__________________
+SENDER : USER
+CMD    : .
+JID    : 963995586812@s.whatsapp.net
+LID    : 112331178696794@lid
+LOC    : GROUP
+ELITE  : NO
+__________________
+
+[3/26/2026, 15:58:05]
+__________________
+UNKNOWN: .
+SENDER: 963995586812@s.whatsapp.net
+__________________
+
+[3/26/2026, 15:58:08]
+__________________
+SENDER : USER
+CMD    : ..
+JID    : 963995586812@s.whatsapp.net
+LID    : 112331178696794@lid
+LOC    : GROUP
+ELITE  : NO
+__________________
+
+[3/26/2026, 15:58:08]
+__________________
+UNKNOWN: ..
+SENDER: 963995586812@s.whatsapp.net
+__________________
+
+[3/26/2026, 15:58:10]
+__________________
+SENDER : USER
+CMD    : .
+JID    : 963995586812@s.whatsapp.net
+LID    : 112331178696794@lid
+LOC    : GROUP
+ELITE  : NO
+__________________
+
+[3/26/2026, 15:58:10]
+__________________
+UNKNOWN: .
+SENDER: 963995586812@s.whatsapp.net
+__________________
+
+[3/26/2026, 15:59:59]
+__________________
+SENDER : OWNER
+CMD    : اعدادات
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:00:32]
+__________________
+SENDER : OWNER
+CMD    : زرف
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:00:32]
+__________________
+UNKNOWN: زرف
+SENDER: 213540419314@s.whatsapp.net
+__________________
+
+[3/26/2026, 16:00:40]
+__________________
+SENDER : OWNER
+CMD    : مشاكل
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:05:51]
+__________________
+SENDER : OWNER
+CMD    : حدث
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:05:53]
+__________________
+SENDER : OWNER
+CMD    : فنش
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:05:53]
+__________________
+UNKNOWN: فنش
+SENDER: 213540419314@s.whatsapp.net
+__________________
+
+[3/26/2026, 16:05:58]
+__________________
+SENDER : OWNER
+CMD    : فنش
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:05:58]
+__________________
+UNKNOWN: فنش
+SENDER: 213540419314@s.whatsapp.net
+__________________
+
+[3/26/2026, 16:06:02]
+__________________
+SENDER : OWNER
+CMD    : مشاكل
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:06:39]
+__________________
+SENDER : OWNER
+CMD    : حدث
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:06:40]
+__________________
+SENDER : OWNER
+CMD    : فنش
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:06:40]
+__________________
+UNKNOWN: فنش
+SENDER: 213540419314@s.whatsapp.net
+__________________
+
+[3/26/2026, 16:07:19]
+__________________
+SENDER : OWNER
+CMD    : حدث
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:07:21]
+__________________
+SENDER : OWNER
+CMD    : فنش
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:09:14]
+__________________
+SENDER : OWNER
+CMD    : حدث
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:09:16]
+__________________
+SENDER : OWNER
+CMD    : غراي
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : GROUP
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:16:39]
+__________________
+SENDER : OWNER
+CMD    : حدث
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : PRIVATE
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:16:41]
+__________________
+SENDER : OWNER
+CMD    : يب
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : PRIVATE
+ELITE  : YES
+__________________
+
+[3/26/2026, 16:16:41]
+__________________
+UNKNOWN: يب
+SENDER: 213540419314@s.whatsapp.net
+__________________
+
+[3/26/2026, 16:17:15]
+__________________
+SENDER : OWNER
+CMD    : .يب
+JID    : 213540419314@s.whatsapp.net
+LID    : 104806312050733@lid
+LOC    : PRIVATE
+ELITE  : YES
+__________________
