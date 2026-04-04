@@ -1,6 +1,6 @@
 // ══════════════════════════════════════════════════════════════
 //  تحرك.js — بحث وإرسال GIFs كألبوم
-//  نفس بيئة ايديت.js
+//  API: Tenor v2 (مجاني — لا يحتاج دفع)
 // ══════════════════════════════════════════════════════════════
 
 import axios from 'axios';
@@ -15,19 +15,16 @@ const NovaUltra = {
     lock:        'off',
 };
 
+// Tenor v2 — مفتاح عام مجاني من Google (demo key)
+const TENOR_KEY = 'AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCyk';
+const TENOR_URL = 'https://tenor.googleapis.com/v2/search';
+
 // ── إرسال الألبوم ─────────────────────────────────────────────
 async function sendAlbumMessage(sock, jid, medias, msg, options = {}) {
-    if (typeof jid !== 'string') throw new TypeError(`jid must be string`);
+    if (typeof jid !== 'string') throw new TypeError('jid must be string');
     if (!Array.isArray(medias) || medias.length < 2) throw new RangeError('Minimum 2 media required');
 
-    for (const media of medias) {
-        if (!media.type || (media.type !== 'image' && media.type !== 'video'))
-            throw new TypeError(`Invalid media type: ${media.type}`);
-        if (!media.data || (!media.data.url && !Buffer.isBuffer(media.data)))
-            throw new TypeError('Invalid media data');
-    }
-
-    const caption   = options.text || options.caption || '';
+    const caption   = options.caption || '';
     const waitDelay = !isNaN(options.delay) ? options.delay : 500;
 
     const album = generateWAMessageFromContent(jid, {
@@ -66,6 +63,26 @@ async function sendAlbumMessage(sock, jid, medias, msg, options = {}) {
     return album;
 }
 
+// ── جلب GIFs من Tenor v2 ─────────────────────────────────────
+async function searchTenor(query, limit = 10) {
+    const { data } = await axios.get(TENOR_URL, {
+        params: {
+            q:      query,
+            key:    TENOR_KEY,
+            limit,
+            media_filter: 'mp4',    // نريد mp4 فقط
+            contentfilter: 'off',
+        },
+        timeout: 15_000,
+    });
+
+    // data.results = مصفوفة نتائج
+    const results = data?.results || [];
+    return results
+        .map(r => r?.media_formats?.mp4?.url || r?.media_formats?.tinygif?.url)
+        .filter(Boolean);
+}
+
 // ── جلسات نشطة ───────────────────────────────────────────────
 const activeSessions = new Map();
 
@@ -81,15 +98,13 @@ async function execute({ sock, msg, args }) {
 
     const name = args.join(' ').trim();
 
-    // ── لو أرسل الاسم مباشرة مع الأمر ─────────────────────
     if (name) {
         await runSearch(sock, msg, chatId, name);
         return;
     }
 
-    // ── لا يوجد اسم → اطلبه ─────────────────────────────────
+    // اطلب الاسم
     activeSessions.set(chatId, { step: 1 });
-
     await sock.sendMessage(chatId, {
         text: '🔍 *اكتب اسم الشخصية أو الـ GIF المطلوب:*',
     }, { quoted: msg }).catch(() => {});
@@ -132,31 +147,22 @@ async function runSearch(sock, msg, chatId, name) {
     try {
         await sock.sendMessage(chatId, { react: { text: '🕒', key: msg.key } }).catch(() => {});
 
-        const apiUrl = 'https://deliriusapi-official.vercel.app';
-        const { data: json } = await axios.get(
-            `${apiUrl}/search/tenor?q=${encodeURIComponent(name)}`,
-            { timeout: 15_000 }
-        );
-        const gifs = json?.data;
+        const urls = await searchTenor(name, 15);
 
-        if (!gifs || gifs.length < 2) {
+        if (urls.length < 2) {
             await sock.sendMessage(chatId, { react: { text: '✖️', key: msg.key } }).catch(() => {});
             return sock.sendMessage(chatId, {
                 text: '❌ لم يتم العثور على نتائج كافية.',
             }, { quoted: msg }).catch(() => {});
         }
 
-        const maxItems = Math.min(gifs.length, 15);
-        const medias   = gifs.slice(0, maxItems).map(gif => ({
-            type: 'video',
-            data: { url: gif.mp4 },
-        }));
+        const medias = urls.map(url => ({ type: 'video', data: { url } }));
 
         const captionText =
 `❀ G I F - S E A R C H ❀
 
 ✦ البحث: *${name}*
-✧ النتائج: *${maxItems}*`;
+✧ النتائج: *${medias.length}*`;
 
         await sendAlbumMessage(sock, chatId, medias, msg, { caption: captionText });
         await sock.sendMessage(chatId, { react: { text: '✔️', key: msg.key } }).catch(() => {});
