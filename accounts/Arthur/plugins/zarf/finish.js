@@ -38,9 +38,6 @@ export let zarfConfig = {
 > *_⟫ \`𝚝.𝚟   𝙰𝚁𝚅𝙰𝙽𝙸𝙰\`  ❀ ⟪_*  
 _*~〔 ◜ https://chat.whatsapp.com/FVN1S1V1KgC7C7SMvZ4zle ◞ 〕~*_
 
-> *_⟫ \`𝚎𝚍𝚒𝚝  𝙰𝚁𝚅𝙰𝙽𝙸𝙰\`┆ ❀ ⟪_*  
-_*~〔 ◜https://chat.whatsapp.com/KAlMFSe9S4B5wSbkETHGjH ◞ 〕~*_
-
  *┊⌁ 🪶 — 𝙰𝚛𝚝𝚑𝚞𝚛 ㊚ ⌁┊*`
   },
   media: {
