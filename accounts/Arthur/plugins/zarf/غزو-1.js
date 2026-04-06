@@ -1,12 +1,4 @@
-// ══════════════════════════════════════════════════════════════
-//  لعبة الغزو الفضائي — غزو.js (Ultra Edition 7.0)
-//  ✅ متوافق مع بيئة Arthur_Bot (BIDS / sender / sock.getElites)
-//  ✅ LID→JID mentions (twice map + cache)
-//  ✅ Anti-Self-Kick via BIDS.pn + BIDS.lid
-//  ✅ Elite & Admin immunity
-//  ✅ Memory leak fix (try/finally)
-//  ✅ Fisher-Yates, DRY loop, return-based elimination
-// ══════════════════════════════════════════════════════════════
+
 import fs   from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
